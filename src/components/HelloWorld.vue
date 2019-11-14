@@ -7,12 +7,9 @@
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Please fill-in the following information</v-toolbar-title>
-                <v-spacer />
+                <v-spacer/>
               </v-toolbar>
               <v-card-text>
-                <v-row justify="center">
-                  <v-date-picker v-model="picker"></v-date-picker>
-                </v-row>
                 <v-select
                   v-model="select"
                   :items="items"
@@ -20,13 +17,27 @@
                   label="Services"
                   required
                 ></v-select>
-                <v-select
-                  v-model="select"
-                  :items="picker"
-                  :rules="[v => !!v || 'Item is required']"
-                  label="Date"
-                  required
-                ></v-select>
+                <v-menu
+                  v-model="showPicker"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  max-width="290px"
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="selectedDate"
+                      label="Choose the date"
+                      hint="YYYY/MM/DD"
+                      persistent-hint
+                      readonly
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker v-model="selectedDate" no-title @input="showPicker = false"></v-date-picker>
+                </v-menu>
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-text-field
                     v-model="name"
@@ -51,17 +62,18 @@
                     label="Do you agree?"
                     required
                   ></v-checkbox>
+                  <center>
+                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Submit</v-btn>
 
-                  <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Validate</v-btn>
+                    <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
+                  </center>
 
-                  <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
-
-                  <v-btn color="warning" @click="resetValidation">Reset Validation</v-btn>
+                  <!-- <v-btn color="warning" @click="resetValidation">Reset Validation</v-btn> -->
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer />
-                <v-btn color="primary">Login</v-btn>
+                <v-spacer/>
+                <!-- <v-btn color="primary">Login</v-btn> -->
               </v-card-actions>
             </v-card>
           </v-col>
@@ -98,9 +110,10 @@ export default {
       "Cosmetic Dentistry",
       "Dental Implants"
     ],
-
     checkbox: false,
-    picker: new Date().toISOString().substr(0, 10)
+    picker: new Date().toISOString().substr(0, 10),
+    showPicker: false,
+    selectedDate: null
   }),
   methods: {
     validate() {
