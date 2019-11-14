@@ -10,6 +10,9 @@
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
+                <v-row justify="center">
+                  <v-date-picker v-model="picker"></v-date-picker>
+                </v-row>
                 <v-select
                   v-model="select"
                   :items="items"
@@ -19,7 +22,7 @@
                 ></v-select>
                 <v-select
                   v-model="select"
-                  :items="items"
+                  :items="picker"
                   :rules="[v => !!v || 'Item is required']"
                   label="Date"
                   required
@@ -33,9 +36,9 @@
                     required
                   ></v-text-field>
                   <v-text-field
-                    v-model="name"
+                    v-model="lname"
                     :counter="10"
-                    :rules="nameRules"
+                    :rules="lnameRules"
                     label="Lastname"
                     required
                   ></v-text-field>
@@ -77,6 +80,10 @@ export default {
       v => !!v || "Name is required",
       v => (v && v.length <= 10) || "Name must be less than 10 characters"
     ],
+    lnameRules: [
+      v => !!v || "Name is required",
+      v => (v && v.length <= 10) || "Name must be less than 10 characters"
+    ],
     email: "",
     emailRules: [
       v => !!v || "E-mail is required",
@@ -91,9 +98,10 @@ export default {
       "Cosmetic Dentistry",
       "Dental Implants"
     ],
-    checkbox: false
-  }),
 
+    checkbox: false,
+    picker: new Date().toISOString().substr(0, 10)
+  }),
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
