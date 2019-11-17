@@ -5,7 +5,10 @@
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
-              <v-toolbar color="primary" dark flat>
+              <v-toolbar>
+                 <!-- color="primary" dark flat -->
+                <img src="@/assets/toothbookLogo.png" style="width:50px;height:auto"/>
+                <v-spacer/>
                 <v-toolbar-title>Please fill-in the following information</v-toolbar-title>
                 <v-spacer/>
               </v-toolbar>
