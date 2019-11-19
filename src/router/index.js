@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import CoverPage from '@/components/CoverPage.vue'
-import HelloWorld from '@/components/HelloWorld.vue'
+import CoverPage from '../components/CoverPage.vue'
+import HelloWorld from '../components/HelloWorld.vue'
 
 
 

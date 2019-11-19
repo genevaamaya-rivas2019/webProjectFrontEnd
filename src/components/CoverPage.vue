@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-img max-width src="@/assets/bg.jpg">
-      <v-btn color="success" class="btnBook" x-large v-on:click="toUser">Book Now</v-btn>
+      <v-btn color="success" class="btnBook" x-large link to="/user">Book Now</v-btn>
       <h1 class="display1" bold>Welcome to ToothBook</h1>
       <h2 class="display" >We Care For Your Smile</h2>
     </v-img>

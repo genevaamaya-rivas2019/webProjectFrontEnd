@@ -4,22 +4,22 @@
       <div class="d-flex align-center"></div>
 
       <v-spacer></v-spacer>
-    </v-app-bar> -->
+    </v-app-bar>-->
 
     <v-content>
-      <CoverPage />
+      <HelloWorld/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import CoverPage from "./components/CoverPage";
+import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
 
   components: {
-    CoverPage
+    HelloWorld
   },
 
   data: () => ({

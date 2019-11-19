@@ -6,8 +6,8 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar>
-                 <!-- color="primary" dark flat -->
-                <img src="@/assets/toothbookLogo.png" style="width:50px;height:auto"/>
+                <!-- color="primary" dark flat -->
+                <img src="@/assets/toothbookLogo.png" style="width:50px;height:auto">
                 <v-spacer/>
                 <v-toolbar-title>Please fill-in the following information</v-toolbar-title>
                 <v-spacer/>
@@ -65,11 +65,23 @@
                     label="Do you agree?"
                     required
                   ></v-checkbox>
-                  <center>
-                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Submit</v-btn>
-
-                    <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
-                  </center>
+                  <v-row justify="center">
+                    <v-dialog v-model="dialog" persistent max-width="290">
+                      <template v-slot:activator="{ on }">
+                        <v-btn color="success" dark @click="validate" v-on="on">Submit</v-btn>
+                        <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
+                      </template>
+                      <v-card>
+                        <v-card-title class="headline">Successfully Saved!!!</v-card-title>
+                        <!-- <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text> -->
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <!-- <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn> -->
+                          <v-btn color="green darken-1" text @click="dialog = false">OK</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </v-row>
 
                   <!-- <v-btn color="warning" @click="resetValidation">Reset Validation</v-btn> -->
                 </v-form>
@@ -89,6 +101,7 @@
 <script>
 export default {
   data: () => ({
+    dialog: false,
     valid: true,
     name: "",
     nameRules: [
@@ -133,3 +146,5 @@ export default {
   }
 };
 </script>
+<style>
+</style>
